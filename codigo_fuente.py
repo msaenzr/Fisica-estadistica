@@ -2,6 +2,7 @@ import random as rd
 import numpy as np
 import matplotlib.pyplot as plt
 import sys
+import statistics as stats
 
 
 def posicion_N(N,r_i):
@@ -56,6 +57,25 @@ def ley_probabilidad(N,n,r_i):
     plt.ylabel('Frecuencia')
     plt.show()
 
+def prom_r(N,n,r_i):
+    """Función encargada de retornar una tupla con la siguiente información
+    (N,<r>,<r^2>). Para esto se utilizan dos listas, r_s donde se almacenan
+    todos los r encontrados y l_final, donde se almacenan todas las tuplas para
+    cada N."""
+    l_final = []
+    for i in N:
+        r_s = []
+        r_s2 = 0
+        for j in range(n):
+            r = posicion_N(i,r_i)
+            r_2 = r**2
+            r_s2+=r_2
+            r_s.append(r)
+        prom = stats.mean(r_s)
+        prom2 = r_s2/n
+        t = (i,prom,prom2)
+        l_final.append(t)
+    return l_final
 
 
 #Menú presentación consola
@@ -65,6 +85,7 @@ def printMenu():
     print("1- Posición r de la partícula luego de N pasos")
     print("2- Histograma con N =500 fijo")
     print("3- Comparación ley de probabilidad N = 500 - a = 1")
+    print("4- <r> y <r^2> para distintos N")
     print("0- Salir")
 
 catalog = None
@@ -89,6 +110,13 @@ while True:
         histograma_r(500,40000,0)
     elif int(inputs[0]) == 3:
         ley_probabilidad(500,40000,0)
+    elif int(inputs[0]) == 4:
+        N = [100,200,400,50,500]
+        re = prom_r(N,200,0)
+        for i in re:
+            print(f"\nPara N = {i[0]}")
+            print(f"\n <r> = {i[1]}")
+            print(f"\n <r^2> = {i[2]}")
     else:
         sys.exit(0)
 
