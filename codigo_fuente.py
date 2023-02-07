@@ -21,8 +21,8 @@ def posicion_N(N,r_i):
             r_f-=1
     return r_f
 
-def histograma_r(N,n,r_i):
-    """Función encargada de retornar un histograma, donde entra como 
+def datahistograma_r(N,n,r_i):
+    """Función encargada de retornar los datos para un histograma, donde entra como 
     parámetro N (Número de pasos), n (Número de iteraciones) y r_i (posición
     inicial de la partícula)."""
     # r = Lista que guarda todo los valores dados dentro de las n iteraciones.
@@ -32,20 +32,39 @@ def histograma_r(N,n,r_i):
         r.append(r_n)
     #bins = Se definen los limites del histograma teniendo en cuenta el número menor y mayor de r.
     bins = range( min(r), max(r)+1)
+    return (r,bins)
 
-    #Se definen los datos del histograma y toda la parte estética de la gráfica. 
-    plt.hist(r,bins,color="brown")
+def histograma_r(N,n,r_i):
+    #Se definen los datos del histograma y toda la parte estética de la gráfica.
+    t = datahistograma_r(N,n,r_i) 
+    plt.hist(t[0],t[1],color="brown")
     plt.title('Histograma marcha aleatoria 1D')
     plt.xlabel('Posición final (m)')
     plt.ylabel('Frecuencia')
     plt.show()
+
+def ley_probabilidad(N,n,r_i):
+
+    t =datahistograma_r(N,n,r_i)
+    x = np.linspace(min(t[0]),max(t[0]))
+    a = 2/(2*np.pi*N)
+    b = -(x**2)/(2*N)
+    f = a* np.exp(b)
+    plt.plot(x,f,color="brown")
+    plt.title('Ley de probabilidad')
+    plt.xlabel('Posición final (m)')
+    plt.ylabel('Frecuencia')
+    plt.show()
+
+
 
 #Menú presentación consola
 
 def printMenu():
     print("\nBienvenido a la marcha aleatoria en una dimensión")
     print("1- Posición r de la partícula luego de N pasos")
-    print("2- Histograma con N =100 fijo")
+    print("2- Histograma con N =500 fijo")
+    print("3- Comparación ley de probabilidad N = 500 - a = 1")
     print("0- Salir")
 
 catalog = None
@@ -68,6 +87,8 @@ while True:
             print(f"\nLa partícula se encuentra {r_f} pasos a la derecha respecto a su posición inicial.")
     elif int(inputs[0]) == 2:
         histograma_r(500,40000,0)
+    elif int(inputs[0]) == 3:
+        ley_probabilidad(500,40000,0)
     else:
         sys.exit(0)
 
