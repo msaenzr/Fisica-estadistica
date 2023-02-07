@@ -14,17 +14,38 @@ def posicion_N(N,r_i):
     for i in range(N):
         #Se genera un número aleatorio entre [0,1]
         r_t = rd.random()
+        #Se verifica si el paso es a la derecha
         if r_t>0.5:
             r_f+=1
         else:
             r_f-=1
     return r_f
 
+def histograma_r(N,n,r_i):
+    """Función encargada de retornar un histograma, donde entra como 
+    parámetro N (Número de pasos), n (Número de iteraciones) y r_i (posición
+    inicial de la partícula)."""
+    # r = Lista que guarda todo los valores dados dentro de las n iteraciones.
+    r = []
+    for i in range(n):
+        r_n = posicion_N(N,r_i)
+        r.append(r_n)
+    #bins = Se definen los limites del histograma teniendo en cuenta el número menor y mayor de r.
+    bins = range( min(r), max(r)+1)
+
+    #Se definen los datos del histograma y toda la parte estética de la gráfica. 
+    plt.hist(r,bins,color="brown")
+    plt.title('Histograma marcha aleatoria 1D')
+    plt.xlabel('Posición final (m)')
+    plt.ylabel('Frecuencia')
+    plt.show()
+
 #Menú presentación consola
 
 def printMenu():
-    print("\nBienvenido")
+    print("\nBienvenido a la marcha aleatoria en una dimensión")
     print("1- Posición r de la partícula luego de N pasos")
+    print("2- Histograma con N =100 fijo")
     print("0- Salir")
 
 catalog = None
@@ -45,7 +66,8 @@ while True:
             print(f"\nLa partícula se encuentra {r_f*-1} pasos a la izquierda respecto a su posición inicial.")
         else:
             print(f"\nLa partícula se encuentra {r_f} pasos a la derecha respecto a su posición inicial.")
-
+    elif int(inputs[0]) == 2:
+        histograma_r(500,40000,0)
     else:
         sys.exit(0)
 
