@@ -1,6 +1,7 @@
 import random as rd
 import numpy as np
 import matplotlib.pyplot as plt
+import sys
 
 
 def posicion_N(N,r_i):
@@ -19,4 +20,34 @@ def posicion_N(N,r_i):
             r_f-=1
     return r_f
 
-print(posicion_N(100,0))
+#Menú presentación consola
+
+def printMenu():
+    print("\nBienvenido")
+    print("1- Posición r de la partícula luego de N pasos")
+    print("0- Salir")
+
+catalog = None
+
+"""
+Menu principal
+"""
+while True:
+    printMenu()
+    inputs = input('Seleccione una opción para continuar\n')
+    if int(inputs[0]) == 1:
+        N = int(input("Ingrese el número de pasos N: "))
+        r_i = int(input("Ingrese la posición inicial de la partícula (Número entero): "))
+        r_f = posicion_N(N,r_i)
+        if r_f ==0:
+            print(f"\nLa posición final de la particula luego de {N} pasos es: {r_f} ")
+        elif r_f <0:
+            print(f"\nLa partícula se encuentra {r_f*-1} pasos a la izquierda respecto a su posición inicial.")
+        else:
+            print(f"\nLa partícula se encuentra {r_f} pasos a la derecha respecto a su posición inicial.")
+
+    else:
+        sys.exit(0)
+
+
+
