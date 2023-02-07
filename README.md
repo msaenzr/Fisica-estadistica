@@ -1,2 +1,4 @@
 # Fisica-estadistica
-Soluciones computacionales a problemas específicos de la materia. 
+Para correr el programa que se encuentra en el archivo "codigo_fuente" solo debe ejecutar y seguir las instrucciones que se presentan en el menú realizado. Se recomienda que no escriba los números con espacios pues asi el programa no funcionará. Además, si desea salir del programa en cualquier momento puede escribir el número 0 y el programa se terminará de ejecutar. 
+
+Ahora bien, para obtener las gráficas en los incisos 2 y 3 se recomienda esperar un poco en caso del que programa se demore ejecutando. No obstante, este tipo de inconvenientes son muy poco probables que sucedan, pues se verificó la eficiencia del código. De acuerdo a esto, se puede observar toda la estructura del programa, donde en cada función se encuentra una breve descripción con las variables más importantes de la función.
